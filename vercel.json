@@ -1,0 +1,13 @@
+{
+  "functions": {
+    "api/**/*.ts": {
+      "maxDuration": 300
+    }
+  },
+  "rewrites": [
+    { "source": "/", "destination": "/api/home" }
+  ],
+  "crons": [
+    { "path": "/api/cron/refresh", "schedule": "0 */6 * * *" }
+  ]
+}
