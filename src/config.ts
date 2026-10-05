@@ -40,7 +40,7 @@ export const config = {
   groqModel: process.env.GROQ_MODEL?.trim() || 'openai/gpt-oss-120b',
   groqTemperature: positiveNumber(process.env.GROQ_TEMPERATURE, 0.1),
   port: positiveNumber(process.env.PORT, 3000),
-  refreshIntervalMs: positiveNumber(process.env.REFRESH_INTERVAL_HOURS, 6) * 60 * 60 * 1000,
+  refreshIntervalMs: positiveNumber(process.env.REFRESH_INTERVAL_HOURS, 24) * 60 * 60 * 1000,
   subjects: subjectsFromEnvironment(),
 };
 

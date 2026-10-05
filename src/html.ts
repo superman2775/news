@@ -48,15 +48,18 @@ export function renderHome(snapshot: NewsSnapshot | null): string {
 </head>
 <body>
   <header>
-    <h1>News</h1>
-    <p>Daily news things. Refresh every 6 hours.</p>
-    <p>Refreshed: ${escapeHtml(snapshot ? new Date(snapshot.refreshedAt).toLocaleString() : 'Never')}</p>
-    <p>Refreshing at: ${escapeHtml(snapshot ? new Date(snapshot.nextRefreshAt).toLocaleString() : 'No refresh scheduled')}</p>
+    <a href="/" aria-label="News home"><span>News</span></a>
+    <nav aria-label="Main navigation">
+      <a href="/" aria-current="page">Today</a>
+      <a href="/docs/index.html">Documentation</a>
+      <a href="/docs/api.html">API</a>
+    </nav>
   </header>
   <main>
     ${errors}
     ${articles}
   </main>
+  <footer>Made by super_man2775</footer>
 </body>
 </html>`;
 }

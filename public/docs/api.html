@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="References for the news API.">
+  <title>News API References</title>
+</head>
+<body>
+  <header>
+    <a href="/" aria-label="News home"><span>The News</span></a>
+    <nav aria-label="Main navigation">
+      <a href="/">Read the news</a>
+      <a href="/docs/index.html">Docs</a>
+      <a href="/docs/api.html" aria-current="page">API</a>
+      <a href="/docs/deployment.html">Deployment</a>
+    </nav>
+  </header>
+  <main>
+    <article>
+      <h1>API References</h1>
+      <p>Here is how to get latest news, uptime and more!</p>
+
+      <h2 id="latest-news">Latest news</h2>
+      <div><span>GET</span>/api/news</div>
+      <p>Contains the latest news articles, latest refresh time, next refresh and errors in a JSON.</p>
+      <pre><code>curl https://news.superman2775.eu/api/news</code></pre>
+      <p>Each article includes an <code>id</code>, <code>subject</code>, <code>title</code>, <code>summary</code>, <code>body</code>, <code>sources</code>, and <code>generatedAt</code>.</p>
+
+      <h2 id="health">Health</h2>
+      <div><span>GET</span>/api/health</div>
+      <p>Status about the API. Contains: <code>ok</code>, <code>refreshedAt</code>, <code>nextRefreshAt</code>, <code>articleCount</code>, and <code>refreshing</code>.</p>
+
+      <h2 id="manual-refresh">Manual refresh</h2>
+      <div><span>POST</span>/api/refresh</div>
+      <p>Temporary, removed later.</p>
+
+      <h2 id="scheduled-refresh">Scheduled refresh</h2>
+      <div><span>GET</span>/api/cron/refresh</div>
+      <p>Says when it will refresh next when hosted on Vercel.</p>
+    </article>
+    <aside aria-label="On this page">
+      <p><strong>On this page</strong></p>
+      <a href="#latest-news">Latest news</a>
+      <a href="#health">Health</a>
+      <a href="#manual-refresh">Manual refresh</a>
+      <a href="#scheduled-refresh">Scheduled refresh</a>
+      <div></div>
+    </aside>
+  </main>
+  <p></p>
+  <footer>Made by super_man2775</a></footer>
+</body>
+</html>

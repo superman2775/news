@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Guide on the deployment of the platform.">
+  <title>News API deployment</title>
+</head>
+<body>
+  <header>
+    <a href="/" aria-label="News home"><span>The News</span></a>
+    <nav aria-label="Main navigation">
+      <a href="/">Read the news</a>
+      <a href="/docs/index.html">Docs</a>
+      <a href="/docs/api.html">API</a>
+      <a href="/docs/deployment.html" aria-current="page">Deployment</a>
+    </nav>
+  </header>
+  <main>
+    <article>
+      <h1>Host this site on Vercel yourself.</h1>
+      <p>This website is made to be hosted on Vercel. That makes it easy if you want to deploy it yourself! This guide leads you through all the steps of deploying the website and API through Vercel.</p>
+
+      <h2 id="requirements">Requirements</h2>
+      <ul>
+        <li>Node.js 20 or later.</li>
+        <li>Hack Club AI API key. (https://ai.hackclub.com, only for people under 18)</li>
+        <li>Groq API key (https://groq.com).</li>
+      </ul>
+
+      <h2 id="environment">.env</h2>
+      <p>Use the <code>.env.example</code> as a reference. Add environmental labels through the official Vercel dashboard. If you want your key leaked, you can also just put them publicly on GitHub. (dont sue me if it goes wrong tho)</p>
+      <table>
+        <thead><tr><th>Variable</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>HACK_CLUB_AI_API_KEY</td><td>Used to search for news.</td></tr>
+          <tr><td>GROQ_API_KEY</td><td>AI provider for generating summaries.</td></tr>
+          <tr><td>GROQ_MODEL</td><td>Optional. The name of the model you want to use.</td></tr>
+          <tr><td>GROQ_TEMPERATURE</td><td>Optional. Generation temperature.</td></tr>
+          <tr><td>NEWS_SUBJECTS</td><td>Optional. List of what subjects there should be news about. Default: Technology, Business, Science, Health, Climate, Sports, Entertainment, and AI.</td></tr>
+          <tr><td>CRON_SECRET</td><td>Optional. Bearer secret checked by the scheduled refresh endpoint.</td></tr>
+          <tr><td>BLOB_READ_WRITE_TOKEN</td><td>Needed to store the news when hosting on Vercel.</td></tr>
+          <tr><td>USE_BLOB_STORAGE</td><td>Set this to true when using blob storage outside of Vercel.</td></tr>
+          <tr><td>REFRESH_INTERVAL_HOURS</td><td>Optional. Defines how long it takes untill the next refresh.</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="deploy">Deploy to Vercel</h2>
+      <ol>
+        <li>Add the environmental labels in Vercel</li>
+        <li>Make a blob storage thing so your data gets saved every refresh.</li>
+        <li>Deploy the project.</li>
+        <li>Try using /api/health and /api/news after the first refresh.</li>
+      </ol>
+
+      <h2 id="local-development">Local</h2>
+      <p>Make a .env following the example from .env.example. Then, run npm install and npm run dev</p>
+    </article>
+    <aside aria-label="On this page">
+      <p><strong>On this page</strong></p>
+      <a href="#requirements">Requirements</a>
+      <a href="#environment">.env</a>
+      <a href="#deploy">Deploy to Vercel</a>
+      <a href="#local-development">Local</a>
+      <div></div>
+    </aside>
+  </main>
+  <p></p>
+  <footer>Made by super_man2775</footer>
+</body>
+</html>

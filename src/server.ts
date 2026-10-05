@@ -1,4 +1,6 @@
 import { createServer, type IncomingMessage, type ServerResponse } from 'node:http';
+import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
 import { config } from './config.js';
 import { renderHome } from './html.js';
 import { getSnapshot, isRefreshing, loadStoredSnapshot, refreshNews, startRefreshScheduler } from './refresh.js';
@@ -14,9 +16,29 @@ function sendHtml(response: ServerResponse, status: number, html: string): void 
   response.end(html);
 }
 
+const staticPages: Record<string, { file: string; contentType: string }> = {
+  '/docs/index.html': { file: 'index.html', contentType: 'text/html; charset=utf-8' },
+  '/docs/api.html': { file: 'api.html', contentType: 'text/html; charset=utf-8' },
+  '/docs/deployment.html': { file: 'deployment.html', contentType: 'text/html; charset=utf-8' },
+};
+
 async function handleRequest(request: IncomingMessage, response: ServerResponse): Promise<void> {
   const url = new URL(request.url ?? '/', `http://${request.headers.host ?? 'localhost'}`);
   const snapshot = getSnapshot();
+
+  if (request.method === 'GET' && url.pathname === '/docs') {
+    response.writeHead(308, { Location: '/docs/index.html' });
+    response.end();
+    return;
+  }
+
+  const staticPage = staticPages[url.pathname];
+  if (request.method === 'GET' && staticPage) {
+    const contents = await readFile(resolve(process.cwd(), 'public', 'docs', staticPage.file));
+    response.writeHead(200, { 'Content-Type': staticPage.contentType });
+    response.end(contents);
+    return;
+  }
 
   if (request.method === 'GET' && url.pathname === '/') {
     sendHtml(response, 200, renderHome(snapshot));
